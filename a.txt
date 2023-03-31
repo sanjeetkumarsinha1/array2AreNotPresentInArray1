@@ -1,0 +1,21 @@
+func solve<T: Hashable & Comparable>(array1: [T], array2: [T]) -> [T] {
+    var count1 = [T: Int]()
+    var count2 = [T: Int]()
+    for elem in array1 {
+        count1[elem, default: 0] += 1
+    }
+    for elem in array2 {
+        count2[elem, default: 0] += 1
+    }
+    var missing = [T]()
+    for (elem, freq) in count2 {
+        if let count = count1[elem] {
+            if freq != count {
+                missing.append(elem)
+            }
+        } else {
+            missing.append(elem)
+        }
+    }
+    return missing.sorted()
+}
